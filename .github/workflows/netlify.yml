@@ -1,0 +1,31 @@
+name: Netlify
+
+on:
+  push:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+          repository: niklasbuschmann/contrast-hugo
+          path: themes/niklasbuschmann/contrast-hugo
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+
+      - name: Build
+        run: hugo --gc --minify
+
+      - name: Deploy
+      - run: npx netlify-cli deploy --dir=./public
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_API_ID }}
