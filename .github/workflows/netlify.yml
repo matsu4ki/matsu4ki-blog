@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: niklasbuschmann/contrast-hugo
-          path: themes/niklasbuschmann/contrast-hugo
+          path: themes/contrast-hugo
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
