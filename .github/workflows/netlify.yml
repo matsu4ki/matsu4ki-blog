@@ -26,12 +26,7 @@ jobs:
           hugo-version: 'latest'
 
       - name: Build
-        run: hugo --gc --minify
-
-      - name: Show Cloned Directory Tree
-        run: |
-          echo ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          echo ${{ secrets.NETLIFY_SITE_ID }}
+        run: hugo --theme--gc --minify
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.1
