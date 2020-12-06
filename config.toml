@@ -1,0 +1,28 @@
+baseURL = "https://matsu4ki.page/"
+languageCode = "ja-jp"
+title = "なんでもござれ"
+theme = "contrast-hugo"
+enableEmoji = true
+
+[taxonomies]
+section = "sections"
+
+[params]
+description = "雑記。適当に書く。"
+
+[permalinks]
+post = "/:year/:month/:day/:title"
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[markup.highlight]
+codeFences = true
+guessSyntax = true
+hl_Lines = ""
+lineNoStart = 1
+lineNos = true
+lineNumbersInTable = true
+noClasses = true
+style = "monokai"
+tabWidth = 2
