@@ -6,15 +6,19 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  deploy:
+  build-deploy:
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Checkout theme repository
+        uses: actions/checkout@v2
+        with:
           repository: niklasbuschmann/contrast-hugo
-          path: themes/niklasbuschmann/contrast-hugo
+          path: themes/contrast-hugo
 
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
@@ -24,8 +28,16 @@ jobs:
       - name: Build
         run: hugo --gc --minify
 
-      - name: Deploy
-        run: npx netlify-cli deploy --dir=./public
+      - name: Show Cloned Directory Tree
+        run: |
+          sudo apt install -y tree
+          tree ./
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v1.1
+        with:
+          publish-dir: './public'
+          production-branch: main
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_API_ID }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
