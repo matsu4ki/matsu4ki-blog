@@ -28,6 +28,11 @@ jobs:
       - name: Build
         run: hugo --gc --minify
 
+      - name: Show Cloned Directory Tree
+        run: |
+          sudo apt install -y tree
+          tree ./
+
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.1
         with:
