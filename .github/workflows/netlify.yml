@@ -6,13 +6,17 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  deploy:
+  build-deploy:
     runs-on: ubuntu-18.04
     steps:
       - name: Checkout
         uses: actions/checkout@v2
         with:
           fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Checkout theme repository
+        uses: actions/checkout@v2
+        with:
           repository: niklasbuschmann/contrast-hugo
           path: themes/niklasbuschmann/contrast-hugo
 
