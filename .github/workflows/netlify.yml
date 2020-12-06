@@ -30,8 +30,8 @@ jobs:
 
       - name: Show Cloned Directory Tree
         run: |
-          sudo apt install -y tree
-          tree ./
+          echo ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          echo ${{ secrets.NETLIFY_SITE_ID }}
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.1
