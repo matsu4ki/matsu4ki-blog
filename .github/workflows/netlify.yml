@@ -2,8 +2,11 @@ name: Netlify
 
 on:
   push:
-  pull_request:
-    types: [opened, synchronize]
+  workflow_run:
+    workflows: ["writeArticle"]
+    branches: [main]
+    types: 
+      - completed
 
 jobs:
   build-deploy:
