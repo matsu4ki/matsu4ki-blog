@@ -6,24 +6,35 @@ on:
       title:
         description: 'タイトル'
         required: true
-      content:
-        description: '内容'
-        required: true
       category:
         description: 'カテゴリ'
         required: true
         default: 'posts'
+      content:
+        description: '内容'
+        required: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Run a one-line script
-        run: echo Hello, world!
-     
-      - name: payload sentense
-        run: echo ${{ github.event.inputs.message }}
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
-      - name: Run a multi-line script
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: 'latest'
+
+      - name: createArticle
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          hugo new ${{ github.event.inputs.category }}/${{ github.event.inputs.title }}.md
+          ls content/${{ github.event.inputs.category }}
+
+      - name: writeArticle
+        run: echo ${{ github.event.inputs.content }} >> content/${{ github.event.inputs.category }}/${{ github.event.inputs.title }}.md
+
+      - name: showArticle
+        run: cat content/${{ github.event.inputs.category }}/${{ github.event.inputs.title }}.md
