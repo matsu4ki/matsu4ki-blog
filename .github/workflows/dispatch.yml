@@ -1,9 +1,9 @@
 # This is a basic workflow to help you get started with Actions
 
 name: dispatch
-
 on:
-  repository_dispatch: type:[test_trigger]
+  repository_dispatch:
+    types: [test_trigger]
 
 jobs:
   build:
