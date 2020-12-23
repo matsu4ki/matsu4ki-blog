@@ -3,11 +3,16 @@ name: dispatch
 on:
  workflow_dispatch:
     inputs:
-      message:
-        description: '説明'
+      title:
+        description: 'タイトル'
         required: true
-        default: 'デフォルト値'
-
+      content:
+        description: '内容'
+        required: true
+      category:
+        description: 'カテゴリ'
+        required: true
+        default: 'posts'
 jobs:
   build:
     runs-on: ubuntu-latest
