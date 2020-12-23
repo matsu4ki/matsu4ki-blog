@@ -1,4 +1,4 @@
-name: dispatch
+name: writeArticle
 
 on:
  workflow_dispatch:
